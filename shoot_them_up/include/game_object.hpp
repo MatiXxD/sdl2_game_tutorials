@@ -29,9 +29,10 @@ public:
     position getPosition() const { return pos; }
     position& getPosition() { return pos; }
 
+public:
+    position pos;
 
 protected:
     SDL_Texture* texture;
-    position pos;
 
 };

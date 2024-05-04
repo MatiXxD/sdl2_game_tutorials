@@ -3,8 +3,13 @@ cmake_minimum_required(VERSION 3.29)
 project("ShootThemUp")
 
 include_directories(include)
-file(GLOB SOURCES "src/*.cpp")
-add_executable(ShootThemUp ${SOURCES})
+add_executable(ShootThemUp 
+    src/main.cpp
+    src/game.cpp
+    src/screen.cpp
+    src/player.cpp
+    src/bullet.cpp
+)
 
 find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
 find_package(SDL2_image REQUIRED)

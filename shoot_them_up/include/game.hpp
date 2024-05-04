@@ -9,6 +9,7 @@
 #include "color.hpp"
 
 #include "player.hpp"
+#include "bullet.hpp"
 
 
 class Game {
@@ -20,16 +21,22 @@ public:
     ~Game();
 
     int inputHandle();
-    
-    void prepareScene(const color&) const ;
+    int handleKeydown(SDL_KeyboardEvent*);
+    int handleKeyup(SDL_KeyboardEvent*);
+    void updateState();
+
+    void prepareScene(const color &) const;
     void presentScene() const ;
-    
+
+    void setPlayer(int, int);
+    void loadTextures(const std::string&);
+    void drawAll() const;
+
     Player* getPlayer();
     Screen* getScreen();
-
 
 private:
     Screen* screen;
     Player* player;
-
+    Bullet* bullet;
 };

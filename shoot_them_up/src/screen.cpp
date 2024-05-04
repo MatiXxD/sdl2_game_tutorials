@@ -37,3 +37,7 @@ Screen::~Screen() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+
+std::pair<int, int> Screen::getSize() const { 
+    return std::pair<int,int>(width, height);
+}
