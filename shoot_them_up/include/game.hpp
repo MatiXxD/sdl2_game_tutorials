@@ -1,42 +1,41 @@
 #pragma once
 
+#include <SDL2/SDL.h>
 #include <iostream>
 #include <string>
-#include <SDL2/SDL.h>
 
+#include "color.hpp"
 #include "exception.hpp"
 #include "screen.hpp"
-#include "color.hpp"
 
-#include "player.hpp"
 #include "bullet.hpp"
-
+#include "player.hpp"
 
 class Game {
 public:
-    enum class status { QUIT, CONTINUE };
-    
-    Game(int, int);
-    Game(int, int, position);
-    ~Game();
+  enum class status { QUIT, CONTINUE };
 
-    int inputHandle();
-    int handleKeydown(SDL_KeyboardEvent*);
-    int handleKeyup(SDL_KeyboardEvent*);
-    void updateState();
+  Game(int, int);
+  Game(int, int, position);
+  ~Game();
 
-    void prepareScene(const color &) const;
-    void presentScene() const ;
+  int inputHandle();
+  int handleKeydown(SDL_KeyboardEvent *);
+  int handleKeyup(SDL_KeyboardEvent *);
+  void updateState();
 
-    void setPlayer(int, int);
-    void loadTextures(const std::string&);
-    void drawAll() const;
+  void prepareScene(const color &) const;
+  void presentScene() const;
 
-    Player* getPlayer();
-    Screen* getScreen();
+  void setPlayer(int, int);
+  void loadTextures(const std::string &);
+  void drawAll() const;
+
+  Player *getPlayer();
+  Screen *getScreen();
 
 private:
-    Screen* screen;
-    Player* player;
-    Bullet* bullet;
+  Screen *screen;
+  Player *player;
+  Bullet *bullet;
 };

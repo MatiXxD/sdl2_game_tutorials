@@ -5,12 +5,10 @@
 
 class Exception : public std::exception {
 public:
-    Exception(const std::string& msg) : message(msg) { }
+  Exception(const std::string &msg) : message(msg) {}
 
-    std::string getError() const {
-        return message;
-    }
+  std::string getError() const { return message; }
 
 private:
-    std::string message;
+  std::string message;
 };
