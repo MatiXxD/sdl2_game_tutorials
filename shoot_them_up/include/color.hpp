@@ -16,3 +16,4 @@ const color GREEN = color(0, 255, 0);
 const color BLUE = color(0, 0, 255);
 const color BLACK = color(0, 0, 0);
 const color WHITE = color(255, 255, 255);
+const color BACKGROUND = color(16, 42, 97);

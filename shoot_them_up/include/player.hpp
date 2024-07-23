@@ -1,38 +1,38 @@
 #pragma once
+#include <string>
 #include "game_object.hpp"
 
-struct Velocity {
-  int speed;
-  bool up;
-  bool down;
-  bool right;
-  bool left;
 
-  Velocity(int s)
-      : speed(s), up(false), down(false), right(false), left(false) {}
-  Velocity(int s, int u, int d, int r, int l)
-      : speed(s), up(u), down(d), right(r), left(l) {}
-};
+constexpr int DEFAULT_PLAYER_SPEED = 8;
+constexpr int DEFAULT_PLAYER_RELOAD = 16;
+constexpr short DEFAULT_PLAYER_HEALTH = 3;
+
 
 class Player : public GameObject {
 public:
   Player();
-  Player(int x, int y, int speed = 2);
+  Player(float x, float y);
   ~Player() override;
 
-  void loadTexture(const std::string &, SDL_Renderer *) override;
   void blit(SDL_Renderer *renderer) override;
+  void getSize() override;
+  void setTexture(SDL_Texture*) override;
 
-  void moveUp(bool);
-  void moveDown(bool);
-  void moveRight(bool);
-  void moveLeft(bool);
-  void startShoot(bool);
+  int getPlayerSpeed() const;
+
   void updatePosition();
-
+  void reloadTick(); 
+  void startShoot(bool);
+  
   bool isShoot() const;
+  bool isReload() const; 
+
+public:
+  float dx, dy;
 
 private:
-  Velocity velocity;
+  int speed;
+  int reload; 
+  short health;
   bool shoot;
 };

@@ -1,16 +1,14 @@
 #include "bullet.hpp"
 
-Bullet::Bullet() : GameObject(), dead(true), dx(0), dy(12) {}
-Bullet::~Bullet() {}
+Bullet::Bullet()
+    : GameObject(), dx(DEFAULT_BULLET_SPEED_X), dy(DEFAULT_BULLET_SPEED_Y),
+      health(DEFAULT_BULLET_HEALTH) { }
 
-void Bullet::loadTexture(const std::string &filename, SDL_Renderer *renderer) {
-  SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
-                 "Loading %s", filename.c_str());
-  texture = IMG_LoadTexture(renderer, filename.c_str());
-  if (!texture) {
-    std::cerr << "Coudn't load image with name: " << filename << std::endl;
-  }
-}
+Bullet::Bullet(float x, float y)
+    : GameObject(x, y), dx(DEFAULT_BULLET_SPEED_X), dy(DEFAULT_BULLET_SPEED_Y),
+      health(DEFAULT_BULLET_HEALTH) { }
+
+Bullet::~Bullet() {}
 
 void Bullet::blit(SDL_Renderer *renderer) {
   SDL_Rect destination;
@@ -21,16 +19,11 @@ void Bullet::blit(SDL_Renderer *renderer) {
   SDL_RenderCopy(renderer, texture, NULL, &destination);
 }
 
+void Bullet::setTexture(SDL_Texture *t) { texture = t; }
+
+void Bullet::getSize() { SDL_QueryTexture(texture, NULL, NULL, &w, &h); }
+
 void Bullet::updatePosition() {
   pos.x += dx;
   pos.y -= dy;
 }
-
-void Bullet::setDead(bool flag) {
-  if (flag)
-    dead = true;
-  else
-    dead = false;
-}
-
-bool Bullet::isDead() const { return dead == true; }

@@ -6,21 +6,22 @@
 #include <string>
 
 struct position {
-  int x;
-  int y;
+  float x;
+  float y;
 
   position() : x(0), y(0) {}
-  position(int x, int y) : x(x), y(y) {}
+  position(float x, float y) : x(x), y(y) {}
 };
 
 class GameObject {
 public:
   GameObject() : pos(position(0, 0)), texture(nullptr) {}
-  GameObject(int x, int y) : pos(position(x, y)), texture(nullptr) {}
-  virtual ~GameObject() { SDL_DestroyTexture(texture); }
+  GameObject(float x, float y) : pos(position(x, y)), texture(nullptr) {}
+  virtual ~GameObject() { }
 
-  virtual void loadTexture(const std::string &, SDL_Renderer *) = 0;
   virtual void blit(SDL_Renderer *renderer) = 0;
+  virtual void getSize() = 0;
+  virtual void setTexture(SDL_Texture*) = 0; 
 
   SDL_Texture *getTexture() { return texture; }
   position getPosition() const { return pos; }
@@ -28,6 +29,7 @@ public:
 
 public:
   position pos;
+  int h, w;
 
 protected:
   SDL_Texture *texture;

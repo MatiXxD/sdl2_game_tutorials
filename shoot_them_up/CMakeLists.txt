@@ -10,6 +10,7 @@ add_executable(ShootThemUp
     src/screen.cpp
     src/player.cpp
     src/bullet.cpp
+    src/game_utility.cpp
 )
 
 find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)

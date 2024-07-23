@@ -1,7 +1,9 @@
 #include "color.hpp"
 #include "game.hpp"
+#include "game_utility.hpp"
+#include <SDL_timer.h>
+#include <cmath>
 #include <filesystem>
-#include <iostream>
 
 int main() {
 
@@ -9,8 +11,10 @@ int main() {
   game.setPlayer(270, 800);
   game.loadTextures(std::filesystem::current_path().string());
 
+  long then = SDL_GetTicks();
+  double remainder = 0.0;
   while (true) {
-    game.prepareScene(WHITE);
+    game.prepareScene(BACKGROUND);
 
     int check = game.inputHandle();
     if (check == 1)
@@ -18,7 +22,7 @@ int main() {
 
     game.drawAll();
     game.presentScene();
-    SDL_Delay(16);
+    capFrameRate(&then, &remainder);
   }
 
   return 0;
