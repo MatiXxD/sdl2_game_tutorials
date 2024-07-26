@@ -17,11 +17,11 @@ class GameObject {
 public:
   GameObject() : pos(position(0, 0)), texture(nullptr) {}
   GameObject(float x, float y) : pos(position(x, y)), texture(nullptr) {}
-  virtual ~GameObject() { }
+  virtual ~GameObject() {}
 
   virtual void blit(SDL_Renderer *renderer) = 0;
   virtual void getSize() = 0;
-  virtual void setTexture(SDL_Texture*) = 0; 
+  virtual void setTexture(SDL_Texture *) = 0;
 
   SDL_Texture *getTexture() { return texture; }
   position getPosition() const { return pos; }

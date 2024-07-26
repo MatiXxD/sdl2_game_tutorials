@@ -2,11 +2,11 @@
 
 Player::Player()
     : GameObject(), shoot(false), speed(DEFAULT_PLAYER_SPEED),
-      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) { }
+      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) {}
 
 Player::Player(float x, float y)
     : GameObject(x, y), shoot(false), speed(DEFAULT_PLAYER_SPEED),
-      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) { }
+      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) {}
 
 Player::~Player() {}
 
@@ -31,8 +31,10 @@ void Player::updatePosition() {
 }
 
 void Player::reloadTick() {
-  if (reload > 0) reload--;
-  else if (reload <= 0) reload = DEFAULT_PLAYER_RELOAD; 
+  if (reload > 0)
+    reload--;
+  else if (reload <= 0)
+    reload = DEFAULT_PLAYER_RELOAD;
 }
 
 void Player::startShoot(bool flag) { shoot = flag ? true : false; }

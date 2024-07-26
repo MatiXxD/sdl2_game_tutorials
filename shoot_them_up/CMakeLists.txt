@@ -10,6 +10,7 @@ add_executable(ShootThemUp
     src/screen.cpp
     src/player.cpp
     src/bullet.cpp
+    src/enemy.cpp
     src/game_utility.cpp
 )
 

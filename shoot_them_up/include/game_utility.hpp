@@ -1,1 +1,1 @@
-void capFrameRate(long* then, double* remainder);
+void capFrameRate(long *then, double *remainder);
