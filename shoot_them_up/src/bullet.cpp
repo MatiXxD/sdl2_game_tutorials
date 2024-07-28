@@ -23,6 +23,12 @@ void Bullet::setTexture(SDL_Texture *t) { texture = t; }
 
 void Bullet::getSize() { SDL_QueryTexture(texture, NULL, NULL, &w, &h); }
 
+bool Bullet::isDead() const { return health <= 0; }
+
+void Bullet::setDead() {
+  health = 0;
+}
+
 void Bullet::updatePosition() {
   pos.x += dx;
   pos.y -= dy;

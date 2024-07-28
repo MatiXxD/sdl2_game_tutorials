@@ -25,6 +25,12 @@ void Enemy::getSize() { SDL_QueryTexture(texture, NULL, NULL, &w, &h); }
 
 int Enemy::getEnemySpeed() const { return speed; }
 
+bool Enemy::isDead() const { return health <= 0; }
+
+void Enemy::hitEnemy() {
+  health -= 1;
+}
+
 void Enemy::updatePosition() {
   pos.y += dy;
 }

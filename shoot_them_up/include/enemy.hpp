@@ -15,8 +15,10 @@ public:
   void setTexture(SDL_Texture *) override;
 
   int getEnemySpeed() const;
+  bool isDead() const;
 
   void updatePosition();
+  void hitEnemy();
 
 public:
   float dx, dy;

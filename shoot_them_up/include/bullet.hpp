@@ -7,6 +7,8 @@ constexpr int DEFAULT_BULLET_SPEED_X = 0;
 constexpr int DEFAULT_BULLET_SPEED_Y = -12;
 constexpr short DEFAULT_BULLET_HEALTH = 1;
 
+enum class BulletType{PLAYER_BULLET, ENEMY_BULLET};
+
 class Bullet : public GameObject {
 public:
   Bullet();
@@ -17,9 +19,13 @@ public:
   void getSize() override;
   void setTexture(SDL_Texture *) override;
 
+  bool isDead() const;
+
+  void setDead();
   void updatePosition();
 
 public:
+  BulletType bt;
   float dx, dy;
 
 private:

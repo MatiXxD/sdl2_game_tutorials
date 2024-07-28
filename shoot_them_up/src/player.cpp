@@ -30,11 +30,11 @@ void Player::updatePosition() {
   pos.y += dy;
 }
 
+void Player::startReload() { reload = DEFAULT_PLAYER_RELOAD; }
+
 void Player::reloadTick() {
   if (reload > 0)
     reload--;
-  else if (reload <= 0)
-    reload = DEFAULT_PLAYER_RELOAD;
 }
 
 void Player::startShoot(bool flag) { shoot = flag ? true : false; }

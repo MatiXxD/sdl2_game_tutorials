@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "bullet.hpp"
 #include "enemy.hpp"
 #include <SDL_render.h>
 
@@ -109,12 +110,28 @@ void Game::updatePlayer() {
 }
 
 void Game::fireBullet() {
+  player->startReload();
   position playerPos = player->getPosition();
   Bullet *bullet = new Bullet(playerPos.x, playerPos.y);
   bullet->setTexture(textures[BULLET_TEXTURE]);
   bullet->getSize();
   bullet->pos.x += (player->w / 2.0) - (bullet->w / 2.0);
+  bullet->bt = BulletType::PLAYER_BULLET;
   bullets.push_back(bullet);
+}
+
+bool Game::bulletHitEnemy(Bullet *bullet) {
+  for (auto it = enemies.begin(); it != enemies.end(); it++) {
+    Enemy *enemy = *it;
+    if (bullet->bt == BulletType::PLAYER_BULLET &&
+        collision_detection(bullet->pos.x, bullet->pos.y, bullet->w, bullet->h,
+                            enemy->pos.x, enemy->pos.y, enemy->w, enemy->h)) {
+      bullet->setDead();
+      enemy->hitEnemy();
+      return true;
+    }
+  }
+  return false;
 }
 
 void Game::updateBullets() {
@@ -123,7 +140,7 @@ void Game::updateBullets() {
     bullet->pos.x += bullet->dx;
     bullet->pos.y += bullet->dy;
 
-    if (bullet->pos.y < 0) {
+    if (bullet->pos.y < 0 || bulletHitEnemy(bullet)) {
       delete bullet;
       auto tmp = it++;
       bullets.erase(tmp);
@@ -149,7 +166,7 @@ void Game::updateEnemies() {
     Enemy *enemy = *it;
     enemy->updatePosition();
 
-    if (enemy->pos.y > screenHeight + enemy->h) {
+    if (enemy->pos.y > screenHeight + enemy->h || enemy->isDead()) {
       delete enemy;
       auto tmp = it++;
       enemies.erase(tmp);

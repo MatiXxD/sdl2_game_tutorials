@@ -10,6 +10,7 @@
 #include <ctime>
 
 #include "color.hpp"
+#include "game_utility.hpp"
 #include "exception.hpp"
 #include "screen.hpp"
 
@@ -20,7 +21,7 @@
 
 constexpr int DEFAULT_SCREEN_WIDTH = 600;
 constexpr int DEFAULT_SCREEN_HEIGHT = 900;
-constexpr int DEFAULT_ENEMY_SPAWN_TIME = 60;
+constexpr int DEFAULT_ENEMY_SPAWN_TIME = 30;
 constexpr char PLAYER_TEXTURE[] = "player";
 constexpr char PLAYER_TEXTURE_PATH[] = "/textures/player.png";
 constexpr char BULLET_TEXTURE[] = "bullet";
@@ -50,6 +51,7 @@ public:
   void spawnEnemies();
 
   void fireBullet();
+  bool bulletHitEnemy(Bullet*);
 
   void prepareScene(const color &) const;
   void presentScene() const;

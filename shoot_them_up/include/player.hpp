@@ -19,6 +19,7 @@ public:
   int getPlayerSpeed() const;
 
   void updatePosition();
+  void startReload();
   void reloadTick();
   void startShoot(bool);
 
