@@ -2,6 +2,7 @@
 #include "bullet.hpp"
 #include "enemy.hpp"
 #include <SDL_render.h>
+#include <filesystem>
 
 Game::Game()
     : spawnTimer(1), screenWidth(DEFAULT_SCREEN_WIDTH),
@@ -227,11 +228,28 @@ void Game::loadTexture(const std::string &name, const std::string &filename,
 }
 
 void Game::loadTextures(const std::string &path) {
-  loadTexture(PLAYER_TEXTURE, path + PLAYER_TEXTURE_PATH,
-              screen->getRenderer());
-  loadTexture(BULLET_TEXTURE, path + BULLET_TEXTURE_PATH,
-              screen->getRenderer());
-  loadTexture(ENEMY_TEXTURE, path + ENEMY_TEXTURE_PATH, screen->getRenderer());
+  std::string texturePathString = "";
+  std::filesystem::path projectPath{path};
+  for (auto const &dirEntry : std::filesystem::directory_iterator{path}) {
+    // std::cout << "TEST " << dirEntry.path().string() << std::endl;
+    if (dirEntry.path().string().find("textures") != std::string::npos) {
+      texturePathString = dirEntry.path().string();
+    }
+  }
+  if (texturePathString == "")
+    return;
+
+  std::cout << "TEST " << texturePathString << std::endl;
+  std::filesystem::path texturePath{texturePathString};
+  for (auto const &dirEntry :
+       std::filesystem::directory_iterator{texturePath}) {
+    if (dirEntry.is_directory())
+      continue;
+    std::string texture = dirEntry.path().stem().string();
+    std::cout << "TEST" << texture << std::endl;
+    loadTexture(texture, dirEntry.path().string(), screen->getRenderer());
+  }
+
   player->setTexture(textures[PLAYER_TEXTURE]);
   player->getSize();
 }

@@ -14,7 +14,12 @@ add_executable(ShootThemUp
     src/game_utility.cpp
 )
 
-find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
+find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
-target_link_libraries(ShootThemUp PRIVATE SDL2::SDL2 SDL2_image)
+target_include_directories(ShootThemUp
+    PUBLIC ${SDL2_INCLUDE_DIRS}
+    PUBLIC ${SDL2IMAGE_INCLUDE_DIRS}
+)
+
+target_link_libraries(ShootThemUp PUBLIC ${SDL2_LIBRARIES} SDL2_image::SDL2_image)

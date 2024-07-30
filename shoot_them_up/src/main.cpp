@@ -5,7 +5,7 @@
 #include <cmath>
 #include <filesystem>
 
-int main() {
+int main(int argc, char** argv) {
 
   Game game(600, 900);
   game.setPlayer(270, 800);

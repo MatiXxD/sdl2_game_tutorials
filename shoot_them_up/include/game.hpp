@@ -2,34 +2,33 @@
 
 #include <SDL2/SDL.h>
 #include <SDL_render.h>
+#include <cstdlib>
+#include <ctime>
+#include <filesystem>
 #include <iostream>
 #include <list>
 #include <string>
 #include <unordered_map>
-#include <cstdlib>
-#include <ctime>
 
 #include "color.hpp"
-#include "game_utility.hpp"
 #include "exception.hpp"
+#include "game_utility.hpp"
 #include "screen.hpp"
 
 #include "bullet.hpp"
+#include "enemy.hpp"
 #include "game_object.hpp"
 #include "player.hpp"
-#include "enemy.hpp"
 
 constexpr int DEFAULT_SCREEN_WIDTH = 600;
 constexpr int DEFAULT_SCREEN_HEIGHT = 900;
 constexpr int DEFAULT_ENEMY_SPAWN_TIME = 30;
-constexpr char PLAYER_TEXTURE[] = "player";
-constexpr char PLAYER_TEXTURE_PATH[] = "/textures/player.png";
-constexpr char BULLET_TEXTURE[] = "bullet";
-constexpr char BULLET_TEXTURE_PATH[] = "/textures/bullet.png";
-constexpr char ENEMY_TEXTURE[] = "enemy";
-constexpr char ENEMY_TEXTURE_PATH[] = "/textures/enemy.png";
-
-
+constexpr char PLAYER_TEXTURE[] =
+    "player"; // should be as player's texture filename
+constexpr char BULLET_TEXTURE[] =
+    "bullet"; // should be as bullet's texture filename
+constexpr char ENEMY_TEXTURE[] =
+    "enemy"; // should be as enemy's texture filename
 
 class Game {
 public:
@@ -51,7 +50,7 @@ public:
   void spawnEnemies();
 
   void fireBullet();
-  bool bulletHitEnemy(Bullet*);
+  bool bulletHitEnemy(Bullet *);
 
   void prepareScene(const color &) const;
   void presentScene() const;
