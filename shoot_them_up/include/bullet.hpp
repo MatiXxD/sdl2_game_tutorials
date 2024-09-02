@@ -22,6 +22,7 @@ public:
   bool isDead() const;
 
   void setDead();
+  void setMove(float dx, float dy);
   void updatePosition();
 
 public:

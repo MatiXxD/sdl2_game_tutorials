@@ -8,7 +8,6 @@
 int main(int argc, char** argv) {
 
   Game game(600, 900);
-  game.setPlayer(270, 800);
   game.loadTextures(std::filesystem::current_path().string());
 
   long then = SDL_GetTicks();

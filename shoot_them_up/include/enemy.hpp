@@ -19,11 +19,20 @@ public:
 
   void updatePosition();
   void hitEnemy();
+  void startReload(int maxReloadTime);
+  void firstReload(int fps);
+  void reloadTick();
+  void startShoot(bool);
+
+  bool isShoot() const;
+  bool isReload() const;
 
 public:
   float dx, dy;
 
 private:
   int speed;
+  int reload;
   short health;
+  bool shoot;
 };

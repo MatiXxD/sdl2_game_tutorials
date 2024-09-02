@@ -32,6 +32,5 @@ public:
 private:
   int speed;
   int reload;
-  short health;
   bool shoot;
 };

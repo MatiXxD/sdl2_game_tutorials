@@ -2,11 +2,11 @@
 
 Player::Player()
     : GameObject(), shoot(false), speed(DEFAULT_PLAYER_SPEED),
-      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) {}
+      reload(DEFAULT_PLAYER_RELOAD) {}
 
 Player::Player(float x, float y)
     : GameObject(x, y), shoot(false), speed(DEFAULT_PLAYER_SPEED),
-      reload(DEFAULT_PLAYER_RELOAD), health(DEFAULT_PLAYER_HEALTH) {}
+      reload(DEFAULT_PLAYER_RELOAD) {}
 
 Player::~Player() {}
 

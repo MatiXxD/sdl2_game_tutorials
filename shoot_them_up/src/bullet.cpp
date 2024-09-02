@@ -21,6 +21,11 @@ void Bullet::blit(SDL_Renderer *renderer) {
 
 void Bullet::setTexture(SDL_Texture *t) { texture = t; }
 
+void Bullet::setMove(float dx_in, float dy_in) {
+  dx = dx_in;
+  dy = dy_in;
+}
+
 void Bullet::getSize() { SDL_QueryTexture(texture, NULL, NULL, &w, &h); }
 
 bool Bullet::isDead() const { return health <= 0; }

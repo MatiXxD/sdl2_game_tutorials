@@ -2,11 +2,12 @@
 #include "game_object.hpp"
 
 Enemy::Enemy()
-    : GameObject(), speed(DEFAULT_ENEMY_SPEED), health(DEFALUT_ENEMY_HEALTH) {}
+    : GameObject(), speed(DEFAULT_ENEMY_SPEED), health(DEFALUT_ENEMY_HEALTH),
+      shoot(false) {}
 
 Enemy::Enemy(float x, float y)
     : GameObject(x, y), speed(DEFAULT_ENEMY_SPEED),
-      health(DEFALUT_ENEMY_HEALTH) {}
+      health(DEFALUT_ENEMY_HEALTH), shoot(false) {}
 
 Enemy::~Enemy() {}
 
@@ -27,10 +28,26 @@ int Enemy::getEnemySpeed() const { return speed; }
 
 bool Enemy::isDead() const { return health <= 0; }
 
-void Enemy::hitEnemy() {
-  health -= 1;
+void Enemy::hitEnemy() { health -= 1; }
+
+void Enemy::updatePosition() { pos.y += dy; }
+
+void Enemy::startReload(int maxReloadTime) {
+  reload = (1 + std::rand() % maxReloadTime);
 }
 
-void Enemy::updatePosition() {
-  pos.y += dy;
+void Enemy::firstReload(int fps) {
+  reload = fps * (1 + (std::rand() % 3));
 }
+
+void Enemy::reloadTick() {
+  if (reload > 0) {
+    reload--;
+  }
+}
+
+void Enemy::startShoot(bool flag) { shoot = flag ? true : false; }
+
+bool Enemy::isReload() const { return reload != 0; }
+
+bool Enemy::isShoot() const { return shoot; }

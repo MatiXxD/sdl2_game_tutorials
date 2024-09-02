@@ -20,15 +20,22 @@
 #include "game_object.hpp"
 #include "player.hpp"
 
+constexpr int DEFAULT_FPS = 60;
 constexpr int DEFAULT_SCREEN_WIDTH = 600;
 constexpr int DEFAULT_SCREEN_HEIGHT = 900;
+constexpr int DEFAULT_PLAYER_X = 270;
+constexpr int DEFAULT_PLAYER_Y = 800;
+constexpr int DEFAULT_RESET_TIMER = DEFAULT_FPS * 2;
 constexpr int DEFAULT_ENEMY_SPAWN_TIME = 30;
+constexpr int DEFAULT_ENEMY_BULLET_SPEED = 6;
 constexpr char PLAYER_TEXTURE[] =
     "player"; // should be as player's texture filename
 constexpr char BULLET_TEXTURE[] =
     "bullet"; // should be as bullet's texture filename
 constexpr char ENEMY_TEXTURE[] =
     "enemy"; // should be as enemy's texture filename
+constexpr char ENEMY_BULLET_TEXTURE[] =
+    "enemy_bullet"; // should be as enemy's texture filename
 
 class Game {
 public:
@@ -36,26 +43,30 @@ public:
 
   Game();
   Game(int, int);
-  Game(int, int, position);
   ~Game();
 
   int inputHandle();
   int handleKeydown(SDL_KeyboardEvent *);
   int handleKeyup(SDL_KeyboardEvent *);
 
+  void resetStage();
+  void initPlayer();
+  void clipPlayer();
+  void spawnEnemies();
+
   void updateState();
   void updatePlayer();
   void updateBullets();
   void updateEnemies();
-  void spawnEnemies();
 
   void fireBullet();
+  void enemyFireBullet(Enemy *);
   bool bulletHitEnemy(Bullet *);
+  bool bulletHitPlayer(Bullet *);
 
   void prepareScene(const color &) const;
   void presentScene() const;
 
-  void setPlayer(int, int);
   void loadTexture(const std::string &, const std::string &, SDL_Renderer *);
   void loadTextures(const std::string &);
   void drawAll() const;
@@ -68,6 +79,7 @@ private:
 
 private:
   int spawnTimer;
+  int stageTimer;
   int screenWidth, screenHeight;
   Screen *screen;
   Player *player;
